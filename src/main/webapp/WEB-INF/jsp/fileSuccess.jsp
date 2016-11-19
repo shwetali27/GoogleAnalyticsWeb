@@ -1,9 +1,25 @@
-<!DOCTYPE html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
-<head>
-<title>Image File Upload</title>
-</head>
 <body>
-	<h1>success</h1>
+	<h2>Spring MVC and List Example</h2>
+
+	<%-- <c:if test="${not empty gaReportInputInfoArrayList}">
+ --%>
+	<table border="1" align="center">
+
+		<tr>
+			<td><b>GaId</b></td>
+			<td><b>GaDiscription</b></td>
+			<td><b>list</b></td>
+		</tr>
+		<c:forEach var="listValue" items="${gaReportResponseFetcherObject}">
+			<tr>
+				<td>${listValue.mGaID}</td>
+				<td>${listValue.mGaDiscription}</td>
+				<td>${listValue.mMetricArraList}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<%-- 	</c:if> --%>
 </body>
 </html>

@@ -48,7 +48,7 @@ public class ResponseElementReader {
 	HashSet<String> androidIdReAppOpen;
 
 	//arraylist of map for date and total visited android ids
-	ArrayList<Multimap<Integer, String>> list = new ArrayList<Multimap<Integer,String>>();
+	public static ArrayList<Multimap<Integer, String>> list = new ArrayList<Multimap<Integer,String>>();
 	//list for event performed
 	ArrayList<String> task = new ArrayList<String>();
 	//map for date and total visited android ids

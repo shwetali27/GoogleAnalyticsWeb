@@ -21,6 +21,7 @@ import com.bridgelabz.model.GaReportInputModel;
 import com.bridgelabz.model.ResponseModel;
 import com.bridgelabz.responseElementReader.ResponseElementReader;
 import com.bridgelabz.responseFetcher.GaReportResponseFetcher;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 @Controller
 public class GoogleAnalyticController {
@@ -60,7 +61,8 @@ public class GoogleAnalyticController {
 				}
 				System.out.println("Finished");
 		
-		return new ModelAndView("fileSuccess");
+				System.out.println(ResponseElementReader.list.get(0).get(20161009).size());
+		return new ModelAndView("fileSuccess","gaReportResponseFetcherObject",gaReportInputInfoArrayList);
 	}
 
 	
