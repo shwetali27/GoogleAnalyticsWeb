@@ -1,11 +1,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <body>
-	<h2>Spring MVC and List Example</h2>
+	<h2>Success</h2>
 
 	<%-- <c:if test="${not empty gaReportInputInfoArrayList}">
  --%>
-	<table border="1" align="center">
+	<%-- <table border="1" align="center">
 
 		<tr>
 			<td><b>GaId</b></td>
@@ -19,7 +19,7 @@
 				<td>${listValue.mMetricArraList}</td>
 			</tr>
 		</c:forEach>
-	</table>
+	</table> --%>
 	<%-- 	</c:if> --%>
 </body>
 </html>

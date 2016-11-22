@@ -21,7 +21,7 @@ import com.bridgelabz.model.GaReportInputModel;
 import com.bridgelabz.model.ResponseModel;
 import com.bridgelabz.responseElementReader.ResponseElementReader;
 import com.bridgelabz.responseFetcher.GaReportResponseFetcher;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+import com.bridgelabz.results.SummaryReportCsv;
 
 @Controller
 public class GoogleAnalyticController {
@@ -35,7 +35,8 @@ public class GoogleAnalyticController {
 	
 	@RequestMapping(value="savefile", method = RequestMethod.POST) 
 	public ModelAndView uploadForm(@RequestParam MultipartFile file,HttpSession session) throws FileNotFoundException, IOException, GeneralSecurityException {
-		System.out.println("File upload get method");
+		System.out.println("File upload post method");
+		
 		FileCopyUtils.copy(file.getBytes(), new FileOutputStream(UPLOAD_DIRECTORY + "/" + file.getOriginalFilename()));
 		String jsonfilePath = UPLOAD_DIRECTORY + "/" + file.getOriginalFilename();
 		System.out.println("File is Stored in: " + jsonfilePath);
@@ -46,6 +47,9 @@ public class GoogleAnalyticController {
 				ResponseModel responseModelObject = new ResponseModel();
 				GaReportResponseFetcher gaReportResponseFetcherObject = new GaReportResponseFetcher(); 
 				ResponseElementReader elementReader = new ResponseElementReader();
+				
+				SummaryReportCsv summaryReportCsv = new SummaryReportCsv();
+				summaryReportCsv.initialize();
 				
 				for (int i = 0; i < gaReportInputInfoArrayList.size(); i++) {
 
@@ -61,8 +65,7 @@ public class GoogleAnalyticController {
 				}
 				System.out.println("Finished");
 		
-				System.out.println(ResponseElementReader.list.get(0).get(20161009).size());
-		return new ModelAndView("fileSuccess","gaReportResponseFetcherObject",gaReportInputInfoArrayList);
+				return new ModelAndView("fileSuccess");
 	}
 
 	

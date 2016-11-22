@@ -16,18 +16,18 @@ import com.bridgelabz.model.GaReportInputModel;
 import com.bridgelabz.model.ResponseModel;
 import com.bridgelabz.model.SecretFileModel;
 import com.bridgelabz.results.AppOpenCsv;
+import com.bridgelabz.results.AppOpenSummaryCsv;
 import com.bridgelabz.results.AppReopenCsv;
 import com.bridgelabz.results.Operations;
-import com.bridgelabz.results.SummaryReportCsv;
 import com.bridgelabz.summary.Summary;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
 public class ResponseElementReader {
-	
-	//creating the object for classes
+
+	// creating the object for classes
 	Summary summaryObject = new Summary();
-	SummaryReportCsv summaryReportCsvObject = new SummaryReportCsv();
+	AppOpenSummaryCsv appOpenSummaryCsv = new AppOpenSummaryCsv();
 
 	int sum = 0;
 
@@ -47,25 +47,27 @@ public class ResponseElementReader {
 	// hash set for app Reopen android id
 	HashSet<String> androidIdReAppOpen;
 
-	//arraylist of map for date and total visited android ids
-	public static ArrayList<Multimap<Integer, String>> list = new ArrayList<Multimap<Integer,String>>();
-	//list for event performed
+	// arraylist of map for date and total visited android ids
+	ArrayList<Multimap<Integer, String>> list = new ArrayList<Multimap<Integer, String>>();
+	// list for event performed
 	ArrayList<String> task = new ArrayList<String>();
-	//map for date and total visited android ids
+
+	// map for date and total visited android ids
 	Multimap<Integer, String> totalCount = ArrayListMultimap.create();
 
-	
 	public void responseElementReader(ResponseModel responseModelObject, GaReportInputModel gaReportInputModel,
 			int size) throws IOException {
+		// creating object of ArrayListAppOpenModel
+		ArrayList<AppOpenModel> appOpenModelArrayListObject = new ArrayList<AppOpenModel>();
+		// creating object of ArrayListReAppOpenModel
+		ArrayList<AppReOpenModel> appReOpenModelArrayListObject = new ArrayList<AppReOpenModel>();
+		// creating object of AllElementArrayList
+		ArrayList<AllElementModels> allElementModelArrayListObject = new ArrayList<AllElementModels>();
+		
 		try {
 
 			sum++;
-			// creating object of ArrayListAppOpenModel
-			ArrayList<AppOpenModel> appOpenModelArrayListObject = new ArrayList<AppOpenModel>();
-			// creating object of ArrayListReAppOpenModel
-			ArrayList<AppReOpenModel> appReOpenModelArrayListObject = new ArrayList<AppReOpenModel>();
-			// creating object of AllElementArrayList
-			ArrayList<AllElementModels> allElementModelArrayListObject = new ArrayList<AllElementModels>();
+			
 			boolean appOpenFlag = false;
 			boolean appReOpenFlag = false;
 			boolean allElementFlag = false;
@@ -119,7 +121,7 @@ public class ResponseElementReader {
 						/*----------------------------------for appReOpen------------------------------------------------*/
 
 						if (gaReportInputModel.getmGaID().equals(ConstantData.two)) {
-							
+
 							appReOpenFlag = true;
 							appReOpenModelObject.setmGaId(gaReportInputModel.getmGaID());
 
@@ -140,7 +142,8 @@ public class ResponseElementReader {
 
 						}
 						/*-------------if other than App open and ReOpen------*/
-						if (!gaReportInputModel.getmGaID().equals(ConstantData.one) && !gaReportInputModel.getmGaID().equals(ConstantData.two)) {
+						if (!gaReportInputModel.getmGaID().equals(ConstantData.one)
+								&& !gaReportInputModel.getmGaID().equals(ConstantData.two)) {
 							allElementFlag = true;
 							allElementModelsObject.setmGaid(gaReportInputModel.getmGaID());
 
@@ -152,7 +155,7 @@ public class ResponseElementReader {
 							if (dimentionList.getKey().equals(ConstantData.dimension1)) {
 								allElementModelsObject.setmAndroidId(dimentionList.getValue());
 							}
-							
+
 						}
 
 					}
@@ -170,7 +173,7 @@ public class ResponseElementReader {
 			/*----------------------getting data for app Open and putting inside map--------------------*/
 			if (gaReportInputModel.getmGaID().equals(ConstantData.one)) {
 
-				//creating csv file for app open
+				// creating csv file for app open
 				AppOpenCsv appOpenCsv = new AppOpenCsv();
 				appOpenCsv.createReport(appOpenModelArrayListObject);
 				for (int i = 0; i < appOpenModelArrayListObject.size(); i++) {
@@ -188,7 +191,8 @@ public class ResponseElementReader {
 					}
 				}
 
-				//checking if particular android id have opened the app again on another date
+				// checking if particular android id have opened the app again
+				// on another date
 				for (int i = 0; i < appOpenModelArrayListObject.size(); i++) {
 					Set<String> keys = multiMapId.keySet();
 					// System.out.println(keys.size());
@@ -198,7 +202,7 @@ public class ResponseElementReader {
 						if (appOpenModelArrayListObject.get(i).getmAndroidId().equals(key)
 								&& !appOpenModelArrayListObject.get(i).getmDate()
 										.equals(SecretFileModel.startDate.replace("-", ""))) {
-							
+
 							multiMapId.put(appOpenModelArrayListObject.get(i).getmAndroidId(),
 									appOpenModelArrayListObject.get(i).getmDate());
 							multiMapEvent.put(appOpenModelArrayListObject.get(i).getmAndroidId(),
@@ -208,8 +212,7 @@ public class ResponseElementReader {
 						}
 					}
 				}
-				task.add(appOpenModelArrayListObject.get(0).getmGadiscription());
-				//calling the method for summary report creation
+				// calling the method for summary report creation
 				totalCount.clear();
 				totalCount = summaryObject.creatReport(appOpenModelArrayListObject, multiMapId);
 				list.add(totalCount);
@@ -218,10 +221,10 @@ public class ResponseElementReader {
 			/*----------------------getting data for app Reopen and putting inside map--------------------*/
 			if (gaReportInputModel.getmGaID().equals(ConstantData.two)) {
 
-				//creating csv for app reopen
+				// creating csv for app reopen
 				AppReopenCsv appReopenCsv = new AppReopenCsv();
 				appReopenCsv.createReport(appReOpenModelArrayListObject);
-				
+
 				for (int i = 0; i < appReOpenModelArrayListObject.size(); i++) {
 					Set<String> keys = multiMapId.keySet();
 					// System.out.println(keys.size());
@@ -230,7 +233,7 @@ public class ResponseElementReader {
 						// if particular android id is present inside app open
 						// then only add data
 						if (appReOpenModelArrayListObject.get(i).getmAndroidId().equals(key)) {
-							
+
 							multiMapId.put(appReOpenModelArrayListObject.get(i).getmAndroidId(),
 									appReOpenModelArrayListObject.get(i).getmDate());
 							multiMapEvent.put(appReOpenModelArrayListObject.get(i).getmAndroidId(),
@@ -242,8 +245,9 @@ public class ResponseElementReader {
 				}
 
 			}
-			
-			/*----------------------getting data for other task and putting inside map--------------------*/			if (!gaReportInputModel.getmGaID().equals("1") && !gaReportInputModel.getmGaID().equals("2")) {
+
+			/*----------------------getting data for other task and putting inside map--------------------*/ if (!gaReportInputModel
+					.getmGaID().equals("1") && !gaReportInputModel.getmGaID().equals("2")) {
 				for (int i = 0; i < allElementModelArrayListObject.size(); i++) {
 					Set<String> keys = multiMapId.keySet();
 					for (String key : keys) {
@@ -260,21 +264,25 @@ public class ResponseElementReader {
 					}
 				}
 
+				String task1 = allElementModelArrayListObject.get(0).getmGadiscription();
+				summaryObject.createSummary(task1, multiMapId,allElementModelArrayListObject);
 			}
+	
 		} catch (Exception e) {
 			System.out.println("there is 0 rows in response");
 			// e.printStackTrace();
 
 		}
 
-		//creating the report text file
+		
+		// creating the report text file
 		if (sum == size) {
 			operationObject.fileCreation(multiMapId, multiMapEvent, multiMapvalue);
+			
 		}
-		
-		//calling the method for csv creation
-		summaryReportCsvObject.csvCreation(task, list);
 
+		// calling the method for csv creation
+		appOpenSummaryCsv.csvCreation(list);
 	}// end of method
 
 }
