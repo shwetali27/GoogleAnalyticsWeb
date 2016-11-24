@@ -71,7 +71,7 @@ public class GoogleAnalyticController {
 					ArrayList<AllElementModels> allElementModelArrayListObject = elementReader.responseElementReader(responseModelObject,
 							gaReportInputInfoArrayList.get(i),gaReportInputInfoArrayList.size());
 
-					hibernateDaoImpl.Save(allElementModelArrayListObject);
+					//hibernateDaoImpl.Save(allElementModelArrayListObject);
 				}
 				
 				System.out.println("Finished");

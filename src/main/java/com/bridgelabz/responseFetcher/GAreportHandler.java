@@ -38,16 +38,16 @@ public class GAreportHandler {
 	String startDate;
 	String endDate;
 
-	//making the constructor private so that this class cannot be instantiated
+	// making the constructor private so that this class cannot be instantiated
 	private GAreportHandler() {
 	}
 
-	//method to return the instance of this class
+	// method to return the instance of this class
 	public static GAreportHandler getInstance() {
 		return instance;
 	}
 
-	//method for authenticating the user
+	// method for authenticating the user
 	public AnalyticsReporting initializeAnalyticsReporting() throws GeneralSecurityException, IOException {
 
 		System.out.println("Authenticating user");
@@ -63,10 +63,12 @@ public class GAreportHandler {
 
 		// helper for accessing protected resources using service account
 		// flow(using .p12 file)
-		GoogleCredential credential = new GoogleCredential.Builder().setTransport(httpTransport)
-				.setJsonFactory(JSON_FACTORY).setServiceAccountId(SERVICE_ACCOUNT_EMAIL)
-				.setServiceAccountPrivateKeyFromP12File(new File(KEY_FILE_LOCATION))
-				.setServiceAccountScopes(AnalyticsReportingScopes.all()).build();
+		GoogleCredential credential = new GoogleCredential.Builder()
+										.setTransport(httpTransport)
+										.setJsonFactory(JSON_FACTORY)
+										.setServiceAccountId(SERVICE_ACCOUNT_EMAIL)
+										.setServiceAccountPrivateKeyFromP12File(new File(KEY_FILE_LOCATION))
+										.setServiceAccountScopes(AnalyticsReportingScopes.all()).build();
 
 		// Construct the Analytics Reporting service object.
 		return new AnalyticsReporting.Builder(httpTransport, JSON_FACTORY, credential)
@@ -74,8 +76,8 @@ public class GAreportHandler {
 	}
 
 	// method which give response after setting dimension metric and filter
-	public GetReportsResponse getReport(AnalyticsReporting service, GaReportInputModel gaReportInputModel)
-			throws IOException {
+	public GetReportsResponse getReport(AnalyticsReporting service, GaReportInputModel gaReportInputModel,
+			String pagetoken,ArrayList<ReportRequest> requests) throws IOException {
 
 		ArrayList<String> metricArrayList = new ArrayList<String>();
 		ArrayList<String> dimensionArrayList = new ArrayList<String>();
@@ -160,8 +162,13 @@ public class GAreportHandler {
 				.add(dimensionFilterPathClause.setFilters(dimensfilterList).setOperator(ConstantData.operatorAND));
 
 		// Creating the ReportRequest object.
-		ReportRequest request = new ReportRequest().setViewId(VIEW_ID).setDateRanges(Arrays.asList(dateRange))
-				.setMetrics(metriclist).setDimensions(dimensList);
+		ReportRequest request = new ReportRequest()
+				.setViewId(VIEW_ID)
+				.setDateRanges(Arrays.asList(dateRange))
+				.setMetrics(metriclist)
+				.setDimensions(dimensList)
+				.setPageSize(10000)
+				.setPageToken(pagetoken);
 
 		// if dimensionFilter is available then only set it
 		if (dimensionFilterArrayList.size() >= 1) {
@@ -169,7 +176,6 @@ public class GAreportHandler {
 		}
 
 		// making ReportRequest ArrayList
-		ArrayList<ReportRequest> requests = new ArrayList<ReportRequest>();
 		requests.add(request);
 		// Creating the GetReportsRequest object.
 		GetReportsRequest getReport = new GetReportsRequest().setReportRequests(requests);

@@ -5,6 +5,13 @@ h1 {
 	text-align: center;
 }
 
+h3 {
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: normal;
+	color: olive;
+	text-align: center;
+}
+
 input {
 	color: #630;
 	background: #efefe2 none;
@@ -23,4 +30,16 @@ header {
 body {
 	text-align: center;
 	background-color: #f0f0f0;
+}
+
+button {
+	background-color: #888a85;
+	border: thick ;
+	border: 2px solid #5c3566;
+	border-radius: 50%;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	font-size: 16px;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
