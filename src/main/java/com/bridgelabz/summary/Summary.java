@@ -17,7 +17,7 @@ public class Summary {
 	int endDate = Integer.parseInt(SecretFileModel.endDate.replace("-", ""));
 
 	SummaryReportCsv summuryReportCsv = new SummaryReportCsv();
-	// csv creation for app open
+	// csv creation for app open for first day 
 	public Multimap<Integer, String> creatReport(ArrayList<AppOpenModel> appOpenModelArrayListObject,
 			Multimap<String, String> multiMapId) {
 
@@ -43,6 +43,7 @@ public class Summary {
 		return totalCount;
 	}
 
+	//method for creating summary report for all task for first day users
 	public void createSummary(String task, Multimap<String, String> multiMapId,
 			ArrayList<AllElementModels> allElementModelArrayListObject) throws IOException {
 

@@ -16,7 +16,6 @@ public class SummaryReportCsv {
 	String summaryreport = ConstantData.resultsFilepath+"SummaryReport.csv";
 	
 	public void initialize() throws IOException {
-		System.out.println("Inside initialize report");
 		
 		File file  = new File(summaryreport);
 		if(file.exists()){

@@ -1,10 +1,36 @@
 package com.bridgelabz.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class AllElementModels {
+	
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
+	public int id;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	@Column
 	private String mGaid;
-	private String mGadiscription;
+	@Column
+	private String mGadiscription;;
+	@Column
 	private String mAndroidId;
+	@Column
 	private String mDate;
+	
+	//getters and setters
 	public String getmGaid() {
 		return mGaid;
 	}

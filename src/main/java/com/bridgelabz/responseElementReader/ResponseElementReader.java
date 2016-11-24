@@ -55,7 +55,7 @@ public class ResponseElementReader {
 	// map for date and total visited android ids
 	Multimap<Integer, String> totalCount = ArrayListMultimap.create();
 
-	public void responseElementReader(ResponseModel responseModelObject, GaReportInputModel gaReportInputModel,
+	public ArrayList<AllElementModels> responseElementReader(ResponseModel responseModelObject, GaReportInputModel gaReportInputModel,
 			int size) throws IOException {
 		// creating object of ArrayListAppOpenModel
 		ArrayList<AppOpenModel> appOpenModelArrayListObject = new ArrayList<AppOpenModel>();
@@ -283,6 +283,7 @@ public class ResponseElementReader {
 
 		// calling the method for csv creation
 		appOpenSummaryCsv.csvCreation(list);
+		return allElementModelArrayListObject;
 	}// end of method
 
 }
