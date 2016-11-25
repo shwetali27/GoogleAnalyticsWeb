@@ -32,9 +32,22 @@ body {
 	background-color: #f0f0f0;
 }
 
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	text-align: left;
+	padding: 8px;
+} 
+
+tr:nth-child(even) {
+	background-color:#c0eee9
+}
+
 button {
 	background-color: #888a85;
-	border: thick ;
 	border: 2px solid #5c3566;
 	border-radius: 50%;
 	color: white;
@@ -42,4 +55,34 @@ button {
 	text-align: center;
 	font-size: 16px;
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	cursor: pointer;
+	outline: none;
 }
+
+button:hover {
+    background-color: #555753;
+    color: white;
+}
+
+/* button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+button span:after {
+  content:'>>';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+button:hover span {
+  padding-right: 25px;
+}
+button:hover span:after {
+  opacity: 1;
+  right: 0;
+} */

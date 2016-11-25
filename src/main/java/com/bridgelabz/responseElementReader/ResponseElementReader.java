@@ -15,6 +15,7 @@ import com.bridgelabz.model.AppReOpenModel;
 import com.bridgelabz.model.GaReportInputModel;
 import com.bridgelabz.model.ResponseModel;
 import com.bridgelabz.model.SecretFileModel;
+import com.bridgelabz.model.SummaryReportModel;
 import com.bridgelabz.results.AppOpenCsv;
 import com.bridgelabz.results.AppOpenSummaryCsv;
 import com.bridgelabz.results.AppReopenCsv;
@@ -29,6 +30,8 @@ public class ResponseElementReader {
 	Summary summaryObject = new Summary();
 	AppOpenSummaryCsv appOpenSummaryCsv = new AppOpenSummaryCsv();
 
+	// creating object for summaryReportModel list
+	public static ArrayList<SummaryReportModel> summaryReportModellist = new ArrayList<SummaryReportModel>();
 	int sum = 0;
 
 	// creating object of dimensionHashMapArrayList to store
@@ -63,6 +66,7 @@ public class ResponseElementReader {
 		ArrayList<AppReOpenModel> appReOpenModelArrayListObject = new ArrayList<AppReOpenModel>();
 		// creating object of AllElementArrayList
 		ArrayList<AllElementModels> allElementModelArrayListObject = new ArrayList<AllElementModels>();
+		
 		
 		try {
 
@@ -142,8 +146,7 @@ public class ResponseElementReader {
 
 						}
 						/*-------------if other than App open and ReOpen------*/
-						if (!gaReportInputModel.getmGaID().equals(ConstantData.one)
-								&& !gaReportInputModel.getmGaID().equals(ConstantData.two)) {
+						if (!gaReportInputModel.getmGaID().equals(ConstantData.one)&& !gaReportInputModel.getmGaID().equals(ConstantData.two)) {
 							allElementFlag = true;
 							allElementModelsObject.setmGaid(gaReportInputModel.getmGaID());
 
@@ -246,8 +249,9 @@ public class ResponseElementReader {
 
 			}
 
-			/*----------------------getting data for other task and putting inside map--------------------*/ if (!gaReportInputModel
-					.getmGaID().equals("1") && !gaReportInputModel.getmGaID().equals("2")) {
+			/*----------------------getting data for other task and putting inside map--------------------*/
+			if (!gaReportInputModel.getmGaID().equals("1") && !gaReportInputModel.getmGaID().equals("2")) {
+				SummaryReportModel summaryReportModelObject = new SummaryReportModel();
 				for (int i = 0; i < allElementModelArrayListObject.size(); i++) {
 					Set<String> keys = multiMapId.keySet();
 					for (String key : keys) {
@@ -265,7 +269,10 @@ public class ResponseElementReader {
 				}
 
 				String task1 = allElementModelArrayListObject.get(0).getmGadiscription();
-				summaryObject.createSummary(task1, multiMapId,allElementModelArrayListObject);
+				//creating the summary
+				summaryReportModelObject = summaryObject.createSummary(task1, multiMapId,allElementModelArrayListObject);
+				//adding the value inside list of summary
+				summaryReportModellist.add(summaryReportModelObject);
 			}
 	
 		} catch (Exception e) {
@@ -278,11 +285,11 @@ public class ResponseElementReader {
 		// creating the report text file
 		if (sum == size) {
 			operationObject.fileCreation(multiMapId, multiMapEvent, multiMapvalue);
-			
 		}
 
 		// calling the method for csv creation
 		appOpenSummaryCsv.csvCreation(list);
+		
 		return allElementModelArrayListObject;
 	}// end of method
 

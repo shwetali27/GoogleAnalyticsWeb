@@ -73,10 +73,9 @@ public class GoogleAnalyticController {
 
 					//hibernateDaoImpl.Save(allElementModelArrayListObject);
 				}
-				
 				System.out.println("Finished");
 		
-				return new ModelAndView("fileSuccess");
+				return new ModelAndView("fileSuccess","summaryReportModellist",ResponseElementReader.summaryReportModellist);
 	}
 
 	
