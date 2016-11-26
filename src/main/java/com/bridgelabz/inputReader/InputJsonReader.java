@@ -1,6 +1,7 @@
 package com.bridgelabz.inputReader;
 
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
@@ -15,12 +16,12 @@ public class InputJsonReader {
 	
 	ArrayList<GaReportInputModel> GaReportInputModelArrayList = new ArrayList<GaReportInputModel>();
 
-	public ArrayList<GaReportInputModel> readInputJsonFile(String jsonFilePath){
+	public ArrayList<GaReportInputModel> readInputJsonFile(InputStreamReader reader){
 		try{
 
 			JSONParser parser = new JSONParser();//json parser is used to read json files
 			// parsing and casting to Object
-			Object obj = parser.parse(new FileReader(jsonFilePath));
+			Object obj = parser.parse(reader);
 			// casting object into JSONObject
 			JSONObject jsonObject = (JSONObject) obj;//creating json object
 
