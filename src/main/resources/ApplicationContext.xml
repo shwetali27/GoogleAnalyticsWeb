@@ -38,8 +38,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.bridgelabz.model.AllElementModels</value>
-				<!-- <value>com.bridgelabz.model.AppOpenModel</value>
-				<value>com.bridgelabz.model.AppReOpenModel</value> -->
+				<value>com.bridgelabz.model.SummaryDatabaseModel</value>
 			</list>
 		</property>
 	</bean>

@@ -18,34 +18,34 @@
 			%>
 	
 			<tr background-color:black>
+				
 				<td>Task\Dates</td>
 				<%
 					if (summaryRepostList.size() != 0) {
 						for (int i = 0; i < summaryRepostList.get(0).getDates().size(); i++) {
 				%>
-				<td><%=summaryRepostList.get(0).getDates().get(i)%></td>
+							<td><%=summaryRepostList.get(0).getDates().get(i)%></td>
 				<%
-					}
+						}
 					}
 				%>
 			</tr>
+			
 			<%
 				for (int i = 0; i < summaryRepostList.size(); i++) {
 					summaryReportModel = summaryRepostList.get(i);
 			%>
-			<tr>
-				<td><%=summaryReportModel.getmGaDiscription()%></td>
-				<%
-					for (int j = 0; j < summaryReportModel.getDates().size(); j++) {
-				%>
-	
-				<td><%=summaryReportModel.getTotalCount().get(j)%></td>
-	
-	
-				<%
-					}
-				%>
-			</tr>
+				<tr>
+					
+					<td><%=summaryReportModel.getmGaDiscription()%></td>
+					<%
+						for (int j = 0; j < summaryReportModel.getDates().size(); j++) {
+					%>
+							<td><%=summaryReportModel.getTotalCount().get(j)%></td>
+					<%
+						}
+					%>
+				</tr>
 			<%
 				}
 			%>

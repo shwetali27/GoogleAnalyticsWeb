@@ -8,7 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.bridgelabz.model.AllElementModels;
+import com.bridgelabz.model.SummaryDatabaseModel;
 
 public class HibernateDaoImpl implements HibernateDao {
 
@@ -17,14 +17,14 @@ public class HibernateDaoImpl implements HibernateDao {
 	Session session;
 
 	// method to save all elements in database
-	public void Save(ArrayList<AllElementModels> responseElementModelArrayList) {
+	public void save(ArrayList<SummaryDatabaseModel> summaryDatabaseModellist) {
 		try {
 
-			for (int i = 0; i < responseElementModelArrayList.size(); i++) {
+			for (int i = 0; i < summaryDatabaseModellist.size(); i++) {
 
 				Session session = sessionFactory.openSession();
 				Transaction tx = session.beginTransaction();
-				session.save(responseElementModelArrayList.get(i));
+				session.save(summaryDatabaseModellist.get(i));
 				tx.commit();
 				session.close();
 			}

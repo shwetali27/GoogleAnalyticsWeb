@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SummaryReportModel {
-	List<Integer> dates = new ArrayList<Integer>();
-	List<Integer> totalCount = new ArrayList<Integer>();
-	String mGaDiscription;
+	private List<Integer> dates = new ArrayList<Integer>();
+	private List<Integer> totalCount = new ArrayList<Integer>();
+	private String mGaDiscription;
 	
 	//getters and setters
 	public List<Integer> getDates() {
@@ -27,5 +27,4 @@ public class SummaryReportModel {
 	public void setmGaDiscription(String mGaDiscription) {
 		this.mGaDiscription = mGaDiscription;
 	}
-	
 }

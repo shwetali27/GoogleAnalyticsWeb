@@ -3,8 +3,9 @@ package com.bridgelabz.dao;
 import java.util.ArrayList;
 
 import com.bridgelabz.model.AllElementModels;
+import com.bridgelabz.model.SummaryDatabaseModel;
 
 public interface HibernateDao {
-	public void Save(ArrayList<AllElementModels> responseElementModelArrayList);
+	public void save(ArrayList<SummaryDatabaseModel> summaryDatabaseModellist);
 	
 }

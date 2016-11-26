@@ -3,11 +3,11 @@ package com.bridgelabz.model;
 import java.util.ArrayList;
 
 public class GaReportInputModel {
-	public String mGaID;
-	public String mGaDiscription;
-	public ArrayList<String> mMetricArraList;
-	public ArrayList<String> mDimensionArraList;
-	public ArrayList<String> mDimensionFilterArraList;
+	private String mGaID;
+	private String mGaDiscription;
+	private ArrayList<String> mMetricArraList;
+	private ArrayList<String> mDimensionArraList;
+	private ArrayList<String> mDimensionFilterArraList;
 	
 	// setter and getter method
 

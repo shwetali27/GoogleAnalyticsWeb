@@ -41,7 +41,9 @@ th, td {
 	text-align: left;
 	padding: 8px;
 } 
-
+tr:FIRST-CHILD{
+	background-color:#ffe6e6
+}
 tr:nth-child(even) {
 	background-color:#c0eee9
 }

@@ -15,6 +15,7 @@ import com.bridgelabz.model.AppReOpenModel;
 import com.bridgelabz.model.GaReportInputModel;
 import com.bridgelabz.model.ResponseModel;
 import com.bridgelabz.model.SecretFileModel;
+import com.bridgelabz.model.SummaryDatabaseModel;
 import com.bridgelabz.model.SummaryReportModel;
 import com.bridgelabz.results.AppOpenCsv;
 import com.bridgelabz.results.AppOpenSummaryCsv;
@@ -30,6 +31,9 @@ public class ResponseElementReader {
 	Summary summaryObject = new Summary();
 	AppOpenSummaryCsv appOpenSummaryCsv = new AppOpenSummaryCsv();
 
+	//creating object of summary report for database list
+	public static ArrayList<SummaryDatabaseModel> summaryDatabaseModellist = new ArrayList<SummaryDatabaseModel>();
+	
 	// creating object for summaryReportModel list
 	public static ArrayList<SummaryReportModel> summaryReportModellist = new ArrayList<SummaryReportModel>();
 	int sum = 0;
@@ -285,6 +289,16 @@ public class ResponseElementReader {
 		// creating the report text file
 		if (sum == size) {
 			operationObject.fileCreation(multiMapId, multiMapEvent, multiMapvalue);
+			for(int i=0;i<summaryReportModellist.size();i++){
+				
+				for(int j=0;j<summaryReportModellist.get(i).getDates().size();j++){
+					SummaryDatabaseModel databaseModel = new SummaryDatabaseModel();
+					databaseModel.setTask(summaryReportModellist.get(i).getmGaDiscription());
+					databaseModel.setDate(summaryReportModellist.get(i).getDates().get(j));
+					databaseModel.setCount(summaryReportModellist.get(i).getTotalCount().get(j));
+					summaryDatabaseModellist.add(databaseModel);
+				}
+			}
 		}
 
 		// calling the method for csv creation

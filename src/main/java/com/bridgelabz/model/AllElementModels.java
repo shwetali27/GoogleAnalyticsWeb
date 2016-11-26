@@ -13,7 +13,7 @@ public class AllElementModels {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	public int id;
+	private int id;
 	public int getId() {
 		return id;
 	}

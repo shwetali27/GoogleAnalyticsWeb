@@ -49,6 +49,7 @@ public class Summary {
 	// method for creating summary report for all task for first day users
 	public SummaryReportModel createSummary(String task, Multimap<String, String> multiMapId,
 			ArrayList<AllElementModels> allElementModelArrayListObject) throws IOException {
+		
 		SummaryReportModel summaryReportModelObject = new SummaryReportModel();
 
 		Multimap<String, String> reportCount = ArrayListMultimap.create();
@@ -64,7 +65,6 @@ public class Summary {
 						// System.out.println(key);
 						reportCount.put(allElementModelArrayListObject.get(j).getmDate(),
 								allElementModelArrayListObject.get(j).getmAndroidId());
-
 					}
 				}
 
@@ -84,7 +84,6 @@ public class Summary {
 		summaryReportModelObject.setDates(dates);
 		summaryReportModelObject.setTotalCount(totalCount);
 		summaryReportModelObject.setmGaDiscription(task);
-		
 		//creating the csv file for summary report
 		summuryReportCsv.createReport(task, reportCount);
 		
