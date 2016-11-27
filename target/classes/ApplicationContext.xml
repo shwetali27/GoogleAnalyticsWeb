@@ -22,7 +22,7 @@
 		<property name="password" value="bridgeit" />
 	</bean> -->
 
-	<!-- connection for mysql -->
+	<!-- connection for postgres -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
@@ -41,8 +41,6 @@
 		</property>
 		<property name="hibernateProperties">
 			<props>
-			
-				
 				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> -->
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.show_sql">false</prop>
