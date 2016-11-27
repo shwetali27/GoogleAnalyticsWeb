@@ -20,15 +20,18 @@ public class Summary {
 
 	SummaryReportCsv summuryReportCsv = new SummaryReportCsv();
 
-	// csv creation for app open for first day
-	public Multimap<Integer, String> creatReport(ArrayList<AppOpenModel> appOpenModelArrayListObject,
+	//adding the data for app open for first day
+	public SummaryReportModel creatReport(ArrayList<AppOpenModel> appOpenModelArrayListObject,
 			Multimap<String, String> multiMapId) {
-
+		
+		SummaryReportModel summaryReportModelObject = new SummaryReportModel();
+		
 		Multimap<Integer, String> totalCount = ArrayListMultimap.create();
 		Set<String> keys = multiMapId.keySet();
 		// counting the visitors for each date and adding inside totalCount
 		for (String key : keys) {
 			totalCount.put((startDate), key);
+			
 			for (int k = 1; k <= (endDate - startDate); k++) {
 				String date = Integer.toString(startDate + k);
 				for (int i = 0; i < appOpenModelArrayListObject.size(); i++) {
@@ -42,8 +45,21 @@ public class Summary {
 				}
 			}
 		}
+		
+		List<Integer> dates = new ArrayList<Integer>();
+		List<Integer> count = new ArrayList<Integer>();
+		// System.out.println(task);
+		for (int k = 0; k <= (endDate - startDate); k++) {
+			dates.add(k,startDate+k);
+			count.add(k, totalCount.get(startDate+k).size());
+			// System.out.println(reportCount.get(Integer.toString(startDate+k)).size());
+		}
+		summaryReportModelObject.setDates(dates);
+		summaryReportModelObject.setTotalCount(count);
+		summaryReportModelObject.setmGaDiscription(appOpenModelArrayListObject.get(0).getmGadiscription());
+		System.out.println(summaryReportModelObject.getTotalCount());
 
-		return totalCount;
+		return summaryReportModelObject;
 	}
 
 	// method for creating summary report for all task for first day users
@@ -57,6 +73,7 @@ public class Summary {
 		Set<String> keys = multiMapId.keySet();
 		for (String key : keys) {
 			for (int j = 0; j < allElementModelArrayListObject.size(); j++) {
+				// System.out.println(task.get(i));
 				// if particular task and key matches the condition then only
 				// put the value inside hash map
 				if (allElementModelArrayListObject.get(j).getmGadiscription().equals(task)) {

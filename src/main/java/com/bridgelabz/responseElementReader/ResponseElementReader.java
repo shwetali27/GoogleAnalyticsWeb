@@ -19,7 +19,6 @@ import com.bridgelabz.model.SecretFileModel;
 import com.bridgelabz.model.SummaryDatabaseModel;
 import com.bridgelabz.model.SummaryReportModel;
 import com.bridgelabz.results.AppOpenCsv;
-import com.bridgelabz.results.AppOpenSummaryCsv;
 import com.bridgelabz.results.AppReopenCsv;
 import com.bridgelabz.results.Operations;
 import com.bridgelabz.results.SummaryReportCsv;
@@ -31,8 +30,6 @@ public class ResponseElementReader {
 
 	// creating the object for classes
 	Summary summaryObject = new Summary();
-	AppOpenSummaryCsv appOpenSummaryCsv = new AppOpenSummaryCsv();
-
 	SummaryReportCsv summaryReportCsv = new SummaryReportCsv();
 
 	// creating object of summary report for database list
@@ -223,10 +220,10 @@ public class ResponseElementReader {
 						}
 					}
 				}
-				// calling the method for summary report creation
-				totalCount.clear();
-				totalCount = summaryObject.creatReport(appOpenModelArrayListObject, multiMapId);
-				list.add(totalCount);
+				//adding the data for app open inside summary
+				SummaryReportModel summaryReportModelObject = new SummaryReportModel();
+				summaryReportModelObject = summaryObject.creatReport(appOpenModelArrayListObject, multiMapId);
+				summaryReportModellist.add(summaryReportModelObject);
 				
 			}
 
@@ -312,9 +309,6 @@ public class ResponseElementReader {
 			//creating csv file for summary report
 			summaryReportCsv.createSummaryReport(summaryReportModellist);
 		}
-
-		// calling the method for csv creation
-		appOpenSummaryCsv.csvCreation(list);
 
 		return allElementModelArrayListObject;
 	}// end of method
