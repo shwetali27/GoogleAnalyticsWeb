@@ -57,7 +57,6 @@ public class Summary {
 		Set<String> keys = multiMapId.keySet();
 		for (String key : keys) {
 			for (int j = 0; j < allElementModelArrayListObject.size(); j++) {
-				// System.out.println(task.get(i));
 				// if particular task and key matches the condition then only
 				// put the value inside hash map
 				if (allElementModelArrayListObject.get(j).getmGadiscription().equals(task)) {
@@ -79,15 +78,10 @@ public class Summary {
 			totalCount.add(k, reportCount.get(Integer.toString(startDate+k)).size());
 			// System.out.println(reportCount.get(Integer.toString(startDate+k)).size());
 		}
-		
-		//setting the values inside summary model 
 		summaryReportModelObject.setDates(dates);
 		summaryReportModelObject.setTotalCount(totalCount);
 		summaryReportModelObject.setmGaDiscription(task);
-		//creating the csv file for summary report
-		summuryReportCsv.createReport(task, reportCount);
-		
-		return summaryReportModelObject;
 
+		return summaryReportModelObject;
 	}
 }

@@ -3,6 +3,7 @@ package com.bridgelabz.responseElementReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
@@ -21,6 +22,7 @@ import com.bridgelabz.results.AppOpenCsv;
 import com.bridgelabz.results.AppOpenSummaryCsv;
 import com.bridgelabz.results.AppReopenCsv;
 import com.bridgelabz.results.Operations;
+import com.bridgelabz.results.SummaryReportCsv;
 import com.bridgelabz.summary.Summary;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -31,9 +33,11 @@ public class ResponseElementReader {
 	Summary summaryObject = new Summary();
 	AppOpenSummaryCsv appOpenSummaryCsv = new AppOpenSummaryCsv();
 
-	//creating object of summary report for database list
+	SummaryReportCsv summaryReportCsv = new SummaryReportCsv();
+
+	// creating object of summary report for database list
 	public static ArrayList<SummaryDatabaseModel> summaryDatabaseModellist = new ArrayList<SummaryDatabaseModel>();
-	
+
 	// creating object for summaryReportModel list
 	public static ArrayList<SummaryReportModel> summaryReportModellist = new ArrayList<SummaryReportModel>();
 	int sum = 0;
@@ -62,20 +66,19 @@ public class ResponseElementReader {
 	// map for date and total visited android ids
 	Multimap<Integer, String> totalCount = ArrayListMultimap.create();
 
-	public ArrayList<AllElementModels> responseElementReader(ResponseModel responseModelObject, GaReportInputModel gaReportInputModel,
-			int size) throws IOException {
+	public ArrayList<AllElementModels> responseElementReader(ResponseModel responseModelObject,
+			GaReportInputModel gaReportInputModel, int size) throws IOException {
 		// creating object of ArrayListAppOpenModel
 		ArrayList<AppOpenModel> appOpenModelArrayListObject = new ArrayList<AppOpenModel>();
 		// creating object of ArrayListReAppOpenModel
 		ArrayList<AppReOpenModel> appReOpenModelArrayListObject = new ArrayList<AppReOpenModel>();
 		// creating object of AllElementArrayList
 		ArrayList<AllElementModels> allElementModelArrayListObject = new ArrayList<AllElementModels>();
-		
-		
+
 		try {
 
 			sum++;
-			
+
 			boolean appOpenFlag = false;
 			boolean appReOpenFlag = false;
 			boolean allElementFlag = false;
@@ -150,7 +153,8 @@ public class ResponseElementReader {
 
 						}
 						/*-------------if other than App open and ReOpen------*/
-						if (!gaReportInputModel.getmGaID().equals(ConstantData.one)&& !gaReportInputModel.getmGaID().equals(ConstantData.two)) {
+						if (!gaReportInputModel.getmGaID().equals(ConstantData.one)
+								&& !gaReportInputModel.getmGaID().equals(ConstantData.two)) {
 							allElementFlag = true;
 							allElementModelsObject.setmGaid(gaReportInputModel.getmGaID());
 
@@ -223,6 +227,7 @@ public class ResponseElementReader {
 				totalCount.clear();
 				totalCount = summaryObject.creatReport(appOpenModelArrayListObject, multiMapId);
 				list.add(totalCount);
+				
 			}
 
 			/*----------------------getting data for app Reopen and putting inside map--------------------*/
@@ -273,37 +278,44 @@ public class ResponseElementReader {
 				}
 
 				String task1 = allElementModelArrayListObject.get(0).getmGadiscription();
-				//creating the summary
-				summaryReportModelObject = summaryObject.createSummary(task1, multiMapId,allElementModelArrayListObject);
-				//adding the value inside list of summary
+				// creating the summary
+				summaryReportModelObject = summaryObject.createSummary(task1, multiMapId,
+						allElementModelArrayListObject);
+				// adding the value inside list of summary
 				summaryReportModellist.add(summaryReportModelObject);
 			}
-	
+
 		} catch (Exception e) {
 			System.out.println("there is 0 rows in response");
 			// e.printStackTrace();
 
 		}
 
-		
 		// creating the report text file
 		if (sum == size) {
 			operationObject.fileCreation(multiMapId, multiMapEvent, multiMapvalue);
-			for(int i=0;i<summaryReportModellist.size();i++){
-				
-				for(int j=0;j<summaryReportModellist.get(i).getDates().size();j++){
-					SummaryDatabaseModel databaseModel = new SummaryDatabaseModel();
-					databaseModel.setTask(summaryReportModellist.get(i).getmGaDiscription());
-					databaseModel.setDate(summaryReportModellist.get(i).getDates().get(j));
-					databaseModel.setCount(summaryReportModellist.get(i).getTotalCount().get(j));
-					summaryDatabaseModellist.add(databaseModel);
+			//sorting the array according to first day values
+			Collections.sort(summaryReportModellist, SummaryReportModel.valueComparator);
+			
+			//creating the list of summaryDatabaseModel
+			for (int i = 0; i < summaryReportModellist.size(); i++) {
+
+				for (int j = 0; j < summaryReportModellist.get(i).getDates().size(); j++) {
+					SummaryDatabaseModel summaryDatabaseModel = new SummaryDatabaseModel();
+					summaryDatabaseModel.setTask(summaryReportModellist.get(i).getmGaDiscription());
+					summaryDatabaseModel.setDate(summaryReportModellist.get(i).getDates().get(j));
+					summaryDatabaseModel.setCount(summaryReportModellist.get(i).getTotalCount().get(j));
+					summaryDatabaseModellist.add(summaryDatabaseModel);
 				}
 			}
+			
+			//creating csv file for summary report
+			summaryReportCsv.createSummaryReport(summaryReportModellist);
 		}
 
 		// calling the method for csv creation
 		appOpenSummaryCsv.csvCreation(list);
-		
+
 		return allElementModelArrayListObject;
 	}// end of method
 

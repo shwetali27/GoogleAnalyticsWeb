@@ -56,9 +56,6 @@ public class GoogleAnalyticController {
 		GaReportResponseFetcher gaReportResponseFetcherObject = new GaReportResponseFetcher();
 		ResponseElementReader elementReader = new ResponseElementReader();
 
-		SummaryReportCsv summaryReportCsv = new SummaryReportCsv();
-		summaryReportCsv.initialize();
-
 		for (int i = 0; i < gaReportInputInfoArrayList.size(); i++) {
 
 			// making ArrayList of responseModel after passing one by one
@@ -73,7 +70,7 @@ public class GoogleAnalyticController {
 		}
 		System.out.println("Finished");
 
-		System.out.println(ResponseElementReader.summaryDatabaseModellist);
+		//adding the summary report inside database
 		hibernateDaoImpl.save(ResponseElementReader.summaryDatabaseModellist);
 		return new ModelAndView("fileSuccess", "summaryReportModellist", ResponseElementReader.summaryReportModellist);
 	}
