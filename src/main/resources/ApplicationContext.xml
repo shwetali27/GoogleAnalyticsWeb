@@ -14,14 +14,25 @@
 	<context:component-scan base-package="com.bridgelabz"></context:component-scan>
 
 	<!-- Configure JDBC Connection -->
-	<bean id="dataSource"
+	<!-- <bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/GoogleAnalytic" />
 		<property name="username" value="root" />
 		<property name="password" value="bridgeit" />
-	</bean>
+	</bean> -->
 
+	<!-- connection for mysql -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url"
+			value="jdbc:postgresql://ec2-54-243-204-195.compute-1.amazonaws.com:5432/ddpike0tipr54q?user=skqmvldxmkpfob&amp;password=LIxvNC1-zC_iv1WwtJzhJ6Xnpf&amp;sslmode=require" />
+
+		<property name="username" value="skqmvldxmkpfob" />
+		<property name="password" value="LIxvNC1-zC_iv1WwtJzhJ6Xnpf" />
+	</bean>
+	
 	<!-- Configure Hibernate 4 Session Facotry -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -30,7 +41,10 @@
 		</property>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			
+				
+				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
@@ -42,8 +56,8 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- class beans -->
 	<bean id="hibernateDaoImpl" class="com.bridgelabz.dao.HibernateDaoImpl" />
-	
+
 </beans>

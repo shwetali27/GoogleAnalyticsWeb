@@ -1,7 +1,6 @@
 package com.bridgelabz.controller;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,13 +22,10 @@ import com.bridgelabz.model.GaReportInputModel;
 import com.bridgelabz.model.ResponseModel;
 import com.bridgelabz.responseElementReader.ResponseElementReader;
 import com.bridgelabz.responseFetcher.GaReportResponseFetcher;
-import com.bridgelabz.results.SummaryReportCsv;
 
 @Controller
 
 public class GoogleAnalyticController {
-	private static final String UPLOAD_DIRECTORY = "/home/bridgeit/FileUpload";
-
 	@Autowired(required = true)
 	HibernateDaoImpl hibernateDaoImpl;
 

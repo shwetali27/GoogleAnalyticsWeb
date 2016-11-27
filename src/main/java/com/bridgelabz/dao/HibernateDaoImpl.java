@@ -14,12 +14,11 @@ public class HibernateDaoImpl implements HibernateDao {
 
 	@Resource(name = "sessionFactory")
 	SessionFactory sessionFactory;
-	Session session;
 
 	// method to save all elements in database
 	public void save(ArrayList<SummaryDatabaseModel> summaryDatabaseModellist) {
 		try {
-
+			
 			for (int i = 0; i < summaryDatabaseModellist.size(); i++) {
 
 				Session session = sessionFactory.openSession();
