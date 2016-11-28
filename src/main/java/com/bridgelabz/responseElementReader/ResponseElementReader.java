@@ -183,7 +183,7 @@ public class ResponseElementReader {
 
 				// creating csv file for app open
 				AppOpenCsv appOpenCsv = new AppOpenCsv();
-				//appOpenCsv.createReport(appOpenModelArrayListObject);
+				appOpenCsv.createReport(appOpenModelArrayListObject);
 				for (int i = 0; i < appOpenModelArrayListObject.size(); i++) {
 					// System.out.println(SecretFileModel.startDate.replace("-",""));
 					// taking the id for first day app open
@@ -232,7 +232,7 @@ public class ResponseElementReader {
 
 				// creating csv for app reopen
 				AppReopenCsv appReopenCsv = new AppReopenCsv();
-				//appReopenCsv.createReport(appReOpenModelArrayListObject);
+				appReopenCsv.createReport(appReOpenModelArrayListObject);
 
 				for (int i = 0; i < appReOpenModelArrayListObject.size(); i++) {
 					Set<String> keys = multiMapId.keySet();
@@ -290,7 +290,7 @@ public class ResponseElementReader {
 
 		// creating the report text file
 		if (sum == size) {
-			//operationObject.fileCreation(multiMapId, multiMapEvent, multiMapvalue);
+			operationObject.fileCreation(multiMapId, multiMapEvent, multiMapvalue);
 			//sorting the array according to first day values
 			Collections.sort(summaryReportModellist, SummaryReportModel.valueComparator);
 			
@@ -299,7 +299,7 @@ public class ResponseElementReader {
 
 				for (int j = 0; j < summaryReportModellist.get(i).getDates().size(); j++) {
 					SummaryDatabaseModel summaryDatabaseModel = new SummaryDatabaseModel();
-					summaryDatabaseModel.setTask(summaryReportModellist.get(i).getmGaDiscription());
+					summaryDatabaseModel.setmGaDiscription(summaryReportModellist.get(i).getmGaDiscription());
 					summaryDatabaseModel.setDate(summaryReportModellist.get(i).getDates().get(j));
 					summaryDatabaseModel.setCount(summaryReportModellist.get(i).getTotalCount().get(j));
 					summaryDatabaseModellist.add(summaryDatabaseModel);
@@ -307,7 +307,7 @@ public class ResponseElementReader {
 			}
 			
 			//creating csv file for summary report
-			//summaryReportCsv.createSummaryReport(summaryReportModellist);
+			summaryReportCsv.createSummaryReport(summaryReportModellist);
 		}
 
 		return allElementModelArrayListObject;

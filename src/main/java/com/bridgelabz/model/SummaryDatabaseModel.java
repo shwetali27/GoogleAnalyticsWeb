@@ -5,10 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="summary_report")
 public class SummaryDatabaseModel {
 
 	@Id
@@ -21,20 +22,21 @@ public class SummaryDatabaseModel {
 		this.id = id;
 	}
 	
-	@Column
-	private String task;
-	@Column
+	@Column(name="Discription")
+	private String mGaDiscription;
+	@Column(name="Date")
 	private Integer date;
-	@Column
+	@Column(name="TotalUsers")
 	private int count;
 	
 	//getters and setters
-	public String getTask() {
-		return task;
+	public String getmGaDiscription() {
+		return mGaDiscription;
 	}
-	public void setTask(String task) {
-		this.task = task;
+	public void setmGaDiscription(String mGaDiscription) {
+		this.mGaDiscription = mGaDiscription;
 	}
+	
 	public Integer getDate() {
 		return date;
 	}
