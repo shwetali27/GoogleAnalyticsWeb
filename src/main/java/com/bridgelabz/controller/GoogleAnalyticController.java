@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +34,7 @@ public class GoogleAnalyticController {
 	}
 
 	@RequestMapping(value = "savefile", method = RequestMethod.POST)
-	public ModelAndView uploadForm(@RequestParam MultipartFile file, HttpSession session)
+	public ModelAndView uploadForm(@RequestParam MultipartFile file)
 			throws FileNotFoundException, IOException, GeneralSecurityException {
 		System.out.println("File upload post method");
 		
