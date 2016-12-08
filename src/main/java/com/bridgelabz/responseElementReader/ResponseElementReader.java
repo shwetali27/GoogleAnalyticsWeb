@@ -29,9 +29,12 @@ import com.google.common.collect.Multimap;
 public class ResponseElementReader {
 
 	// creating the object for classes
+	
 	Summary summaryObject = new Summary();
-	SummaryReportCsv summaryReportCsv = new SummaryReportCsv();
-
+	/*******************************************************/
+	/*SummaryReportCsv summaryReportCsv = new SummaryReportCsv();*/
+	/*******************************************************/
+	
 	// creating object of summary report for database list
 	public static ArrayList<SummaryDatabaseModel> summaryDatabaseModellist = new ArrayList<SummaryDatabaseModel>();
 
@@ -45,7 +48,7 @@ public class ResponseElementReader {
 	// valueList to store values
 	ArrayList<HashMap<String, String>> valueList = new ArrayList<HashMap<String, String>>();
 
-	Operations operationObject = new Operations();
+	//Operations operationObject = new Operations();
 	Multimap<String, String> multiMapId = ArrayListMultimap.create();
 	Multimap<String, String> multiMapEvent = ArrayListMultimap.create();
 	Multimap<String, Collection<String>> multiMapvalue = ArrayListMultimap.create();
@@ -182,8 +185,12 @@ public class ResponseElementReader {
 			if (gaReportInputModel.getmGaID().equals(ConstantData.one)) {
 
 				// creating csv file for app open
-				AppOpenCsv appOpenCsv = new AppOpenCsv();
-				appOpenCsv.createReport(appOpenModelArrayListObject);
+				
+				/*******************************************************/
+				//AppOpenCsv appOpenCsv = new AppOpenCsv();
+				//appOpenCsv.createReport(appOpenModelArrayListObject);
+				/*******************************************************/
+				
 				for (int i = 0; i < appOpenModelArrayListObject.size(); i++) {
 					// System.out.println(SecretFileModel.startDate.replace("-",""));
 					// taking the id for first day app open
@@ -231,8 +238,11 @@ public class ResponseElementReader {
 			if (gaReportInputModel.getmGaID().equals(ConstantData.two)) {
 
 				// creating csv for app reopen
-				AppReopenCsv appReopenCsv = new AppReopenCsv();
-				appReopenCsv.createReport(appReOpenModelArrayListObject);
+				
+				/*******************************************************/
+				/*AppReopenCsv appReopenCsv = new AppReopenCsv();
+				appReopenCsv.createReport(appReOpenModelArrayListObject);*/
+				/*******************************************************/
 
 				for (int i = 0; i < appReOpenModelArrayListObject.size(); i++) {
 					Set<String> keys = multiMapId.keySet();
@@ -290,7 +300,9 @@ public class ResponseElementReader {
 
 		// creating the report text file
 		if (sum == size) {
-			operationObject.fileCreation(multiMapId, multiMapEvent, multiMapvalue);
+			/*******************************************************/
+			/*operationObject.fileCreation(multiMapId, multiMapEvent, multiMapvalue);*/
+			/*******************************************************/
 			//sorting the array according to first day values
 			Collections.sort(summaryReportModellist, SummaryReportModel.valueComparator);
 			
@@ -307,7 +319,9 @@ public class ResponseElementReader {
 			}
 			
 			//creating csv file for summary report
-			summaryReportCsv.createSummaryReport(summaryReportModellist);
+			/*******************************************************/
+			/*summaryReportCsv.createSummaryReport(summaryReportModellist);*/
+			/*******************************************************/
 		}
 
 		return allElementModelArrayListObject;
