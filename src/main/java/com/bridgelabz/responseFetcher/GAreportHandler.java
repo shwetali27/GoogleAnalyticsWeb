@@ -58,6 +58,8 @@ public class GAreportHandler {
 		startDate = SecretFileModel.getStartDate();
 		endDate = SecretFileModel.getEndDate();
 
+		File currFile = new File(getClass().getClassLoader().getResource("AppyGAReports-35a6c523765c.p12").getFile());
+
 		// creating new instance for http transport for trusted certificates
 		HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 
@@ -67,7 +69,7 @@ public class GAreportHandler {
 										.setTransport(httpTransport)
 										.setJsonFactory(JSON_FACTORY)
 										.setServiceAccountId(SERVICE_ACCOUNT_EMAIL)
-										.setServiceAccountPrivateKeyFromP12File(new File(KEY_FILE_LOCATION))
+										.setServiceAccountPrivateKeyFromP12File(currFile)
 										.setServiceAccountScopes(AnalyticsReportingScopes.all()).build();
 
 		// Construct the Analytics Reporting service object.
