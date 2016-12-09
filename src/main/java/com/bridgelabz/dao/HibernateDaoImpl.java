@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -20,8 +19,6 @@ public class HibernateDaoImpl implements HibernateDao {
 		System.out.println("Droping table");
 		Session session = sessionFactory.openSession();
 		session.createSQLQuery("TRUNCATE summary_report").executeUpdate();
-		
-
 	}
 
 	// method to save all elements in database

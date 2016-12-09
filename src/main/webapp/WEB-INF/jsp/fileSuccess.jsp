@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 	<head>
+	<title>Summary Report</title>
 	<style type="text/css">
 			<%@include file="/WEB-INF/css/type.css"%>
 	</style>
