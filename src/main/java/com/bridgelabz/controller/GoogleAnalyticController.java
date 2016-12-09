@@ -36,6 +36,7 @@ public class GoogleAnalyticController {
 	@RequestMapping(value = "savefile", method = RequestMethod.POST)
 	public ModelAndView uploadForm(@RequestParam MultipartFile file)
 			throws FileNotFoundException, IOException, GeneralSecurityException {
+		ResponseElementReader.summaryReportModellist.clear();
 		System.out.println("File upload post method");
 		
 		//storing the uploaded file inside reader
