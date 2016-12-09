@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,10 +16,18 @@ public class HibernateDaoImpl implements HibernateDao {
 	@Resource(name = "sessionFactory")
 	SessionFactory sessionFactory;
 
+	public void drop() {
+		System.out.println("Droping table");
+		Session session = sessionFactory.openSession();
+		session.createSQLQuery("TRUNCATE summary_report").executeUpdate();
+		
+
+	}
+
 	// method to save all elements in database
 	public void save(ArrayList<SummaryDatabaseModel> summaryDatabaseModellist) {
 		try {
-			
+
 			for (int i = 0; i < summaryDatabaseModellist.size(); i++) {
 
 				Session session = sessionFactory.openSession();

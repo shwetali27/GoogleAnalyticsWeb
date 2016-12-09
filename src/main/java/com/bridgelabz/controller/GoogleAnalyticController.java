@@ -64,6 +64,7 @@ public class GoogleAnalyticController {
 		}
 		System.out.println("Finished");
 
+		hibernateDaoImpl.drop();
 		//adding the summary report inside database
 		hibernateDaoImpl.save(ResponseElementReader.summaryDatabaseModellist);
 		return new ModelAndView("fileSuccess", "summaryReportModellist", ResponseElementReader.summaryReportModellist);
