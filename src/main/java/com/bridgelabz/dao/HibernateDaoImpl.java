@@ -15,8 +15,8 @@ public class HibernateDaoImpl implements HibernateDao {
 	@Resource(name = "sessionFactory")
 	SessionFactory sessionFactory;
 
-	public void drop() {
-		System.out.println("Droping table");
+	public void truncate() {
+		System.out.println("delete data");
 		Session session = sessionFactory.openSession();
 		session.createSQLQuery("TRUNCATE summary_report").executeUpdate();
 	}
@@ -24,16 +24,18 @@ public class HibernateDaoImpl implements HibernateDao {
 	// method to save all elements in database
 	public void save(ArrayList<SummaryDatabaseModel> summaryDatabaseModellist) {
 		try {
+			Session session = sessionFactory.openSession();
 
+			System.out.println("Inside summary size" +summaryDatabaseModellist.size());
+			
 			for (int i = 0; i < summaryDatabaseModellist.size(); i++) {
 
-				Session session = sessionFactory.openSession();
 				Transaction tx = session.beginTransaction();
 				session.save(summaryDatabaseModellist.get(i));
 				tx.commit();
-				session.close();
-			}
 
+			}
+			session.close();
 		} catch (Exception e) {
 			System.out.println("hello");
 			e.printStackTrace();

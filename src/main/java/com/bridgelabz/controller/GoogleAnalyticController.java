@@ -37,11 +37,12 @@ public class GoogleAnalyticController {
 	public ModelAndView uploadForm(@RequestParam MultipartFile file)
 			throws FileNotFoundException, IOException, GeneralSecurityException {
 		ResponseElementReader.summaryReportModellist.clear();
+		ResponseElementReader.summaryDatabaseModellist.clear();
+
 		System.out.println("File upload post method");
-		
-		//storing the uploaded file inside reader
-		InputStreamReader reader=new InputStreamReader(file.getInputStream());
-		
+		// storing the uploaded file inside reader
+		InputStreamReader reader = new InputStreamReader(file.getInputStream());
+
 		// reading the input json file and storing inside the list
 		InputJsonReader inputJsonReader = new InputJsonReader();
 		ArrayList<GaReportInputModel> gaReportInputInfoArrayList = inputJsonReader.readInputJsonFile(reader);
@@ -58,14 +59,16 @@ public class GoogleAnalyticController {
 			responseModelObject = gaReportResponseFetcherObject.getResponse(gaReportInputInfoArrayList.get(i));
 
 			// reading the response and finding the result
-			elementReader.responseElementReader(
-					responseModelObject, gaReportInputInfoArrayList.get(i), gaReportInputInfoArrayList.size());
+			elementReader.responseElementReader(responseModelObject, gaReportInputInfoArrayList.get(i),
+					gaReportInputInfoArrayList.size());
 
 		}
 		System.out.println("Finished");
 
-		hibernateDaoImpl.drop();
-		//adding the summary report inside database
+		if (ResponseElementReader.summaryDatabaseModellist.size() > 0) {
+			hibernateDaoImpl.truncate();
+		}
+		// adding the summary report inside database
 		hibernateDaoImpl.save(ResponseElementReader.summaryDatabaseModellist);
 		return new ModelAndView("fileSuccess", "summaryReportModellist", ResponseElementReader.summaryReportModellist);
 	}
