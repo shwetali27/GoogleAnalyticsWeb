@@ -18,9 +18,6 @@ import com.bridgelabz.model.ResponseModel;
 import com.bridgelabz.model.SecretFileModel;
 import com.bridgelabz.model.SummaryDatabaseModel;
 import com.bridgelabz.model.SummaryReportModel;
-import com.bridgelabz.results.AppOpenCsv;
-import com.bridgelabz.results.AppReopenCsv;
-import com.bridgelabz.results.Operations;
 import com.bridgelabz.results.SummaryReportCsv;
 import com.bridgelabz.summary.Summary;
 import com.google.common.collect.ArrayListMultimap;
@@ -31,9 +28,7 @@ public class ResponseElementReader {
 	// creating the object for classes
 	
 	Summary summaryObject = new Summary();
-	/*******************************************************/
-	/*SummaryReportCsv summaryReportCsv = new SummaryReportCsv();*/
-	/*******************************************************/
+	SummaryReportCsv summaryReportCsv = new SummaryReportCsv();
 	
 	// creating object of summary report for database list
 	public static ArrayList<SummaryDatabaseModel> summaryDatabaseModellist = new ArrayList<SummaryDatabaseModel>();
@@ -319,9 +314,8 @@ public class ResponseElementReader {
 			}
 			
 			//creating csv file for summary report
-			/*******************************************************/
-			/*summaryReportCsv.createSummaryReport(summaryReportModellist);*/
-			/*******************************************************/
+			summaryReportCsv.createSummaryReport(summaryReportModellist);
+			
 		}
 
 		return allElementModelArrayListObject;

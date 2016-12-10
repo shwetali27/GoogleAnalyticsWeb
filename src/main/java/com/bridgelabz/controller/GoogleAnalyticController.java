@@ -1,13 +1,21 @@
 package com.bridgelabz.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URLConnection;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,4 +81,31 @@ public class GoogleAnalyticController {
 		return new ModelAndView("fileSuccess", "summaryReportModellist", ResponseElementReader.summaryReportModellist);
 	}
 
+	//method for downloading the summary report
+	@RequestMapping(value="download",method=RequestMethod.GET)
+	public void downloadFile(HttpServletResponse response){
+		System.out.println("inside file download");
+		try{
+			//reading file from classpath 
+			File file = new File(getClass().getClassLoader().getResource("SummaryReport.csv").getFile());
+			
+			String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+			System.out.println("mimetype before : " + mimeType);
+	
+			//for default mime type
+			if (mimeType == null) {
+				System.out.println("mimetype is not detectable, will take default");
+				mimeType = "application/octet-stream";
+			}
+	
+			System.out.println("mimetype : " + mimeType);
+			
+			response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + file.getName() +"\""));
+	
+			InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+			FileCopyUtils.copy(inputStream, response.getOutputStream());
+		}catch (IOException e) {
+			System.out.println(e);
+		}
+	}
 }

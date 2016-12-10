@@ -15,7 +15,7 @@ import com.google.api.services.analyticsreporting.v4.model.ReportRequest;
 
 public class GaReportResponseFetcher {
 	
-	Logger logger = Logger.getLogger(GaReportResponseFetcher.class);
+	Logger logger = Logger.getLogger(GaReportResponseFetcher.class.getName());
 	// creating object of InitializeAnalyticsReporting
 	GAreportHandler reportHandler = GAreportHandler.getInstance();
 	AnalyticsReporting service;

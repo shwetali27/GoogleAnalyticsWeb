@@ -51,5 +51,12 @@
 				}
 			%>
 		</table>
+		<br/>
+		<form:form method="get">
+			<a href="download">
+			<button2 class="button">Download</button2>
+		</a>
+		</form:form>
+		
 	</body>
 </html>
