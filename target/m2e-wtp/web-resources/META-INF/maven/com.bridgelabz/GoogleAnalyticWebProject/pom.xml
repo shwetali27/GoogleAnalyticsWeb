@@ -76,6 +76,12 @@
 			<version>1.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- fileUpload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -132,7 +138,7 @@
 			<version>9.4.1208</version>
 		</dependency>
 
-		<!-- dependency added for HttpServletResponse error on heroku -->
+		<!-- dependency added for HTTPServletResponce error on heroku -->
 		<dependency>
 			<groupId>com.heroku.sdk</groupId>
 			<artifactId>heroku-maven-plugin</artifactId>
