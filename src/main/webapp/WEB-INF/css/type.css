@@ -1,7 +1,7 @@
 h1 {
 	font-family: Verdana, Geneva, sans-serif;
 	font-weight: normal;
-	color: SeaGreen;
+	color: #0c81cc;
 	text-align: center;
 }
 
@@ -68,12 +68,13 @@ button:hover {
 
 button2 {
 	background-color: #a4c88d;
-	border: 2px solid #5c3566;
-	border-radius: 10%;
+	border: 2px solid #4e9a06;
+	border-radius: 7%;
 	color: Black;
 	padding: 10px 20px;
 	text-align: center;
 	font-size: 16px;
+	font: bold
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 	cursor: pointer;
 	outline: none;
