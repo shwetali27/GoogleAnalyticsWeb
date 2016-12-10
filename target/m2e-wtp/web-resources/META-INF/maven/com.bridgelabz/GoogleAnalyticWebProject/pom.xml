@@ -76,7 +76,7 @@
 			<version>1.2</version>
 		</dependency>
 
-		<!-- dependency for heroku error -->
+		<!-- dependency for heroku-deploy error -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
