@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgelabz.dao.HibernateDaoImpl;
 import com.bridgelabz.inputReader.InputJsonReader;
+import com.bridgelabz.model.Date;
 import com.bridgelabz.model.GaReportInputModel;
 import com.bridgelabz.model.ResponseModel;
 import com.bridgelabz.responseElementReader.ResponseElementReader;
@@ -42,11 +44,17 @@ public class GoogleAnalyticController {
 	}
 
 	@RequestMapping(value = "savefile", method = RequestMethod.POST)
-	public ModelAndView uploadForm(@RequestParam MultipartFile file)
+	public ModelAndView uploadForm(@ModelAttribute Date date, @RequestParam MultipartFile file)
 			throws FileNotFoundException, IOException, GeneralSecurityException {
+		
+		System.out.println(date.getStartDate()+","+date.getEndDate());
+		System.out.println("is Empty: "+date.getEndDate().isEmpty());
 		ResponseElementReader.summaryReportModellist.clear();
 		ResponseElementReader.summaryDatabaseModellist.clear();
 
+		if(date.getStartDate().isEmpty() & date.getEndDate().isEmpty()){
+			
+		}
 		System.out.println("File upload post method");
 		// storing the uploaded file inside reader
 		InputStreamReader reader = new InputStreamReader(file.getInputStream());
