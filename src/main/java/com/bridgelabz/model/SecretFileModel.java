@@ -1,13 +1,13 @@
 package com.bridgelabz.model;
 
 public class SecretFileModel {
-	public static String startDate;
-	public static String endDate;
-	public static String APPLICATION_NAME;
-	public static String KEY_FILE_LOCATION;
-	public static String SERVICE_ACCOUNT_EMAIL;
-	public static String VIEW_ID;
-	public static String CsvFilePath;
+	private static String startDate;
+	private static String endDate;
+	private static String APPLICATION_NAME;
+	private static String KEY_FILE_LOCATION;
+	private static String SERVICE_ACCOUNT_EMAIL;
+	private static String VIEW_ID;
+	private static String CsvFilePath;
 	
 	//getters and setters
 	public static String getStartDate() {

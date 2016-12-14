@@ -2,10 +2,12 @@ package com.bridgelabz.results;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import com.bridgelabz.constants.ConstantData;
 import com.bridgelabz.model.SecretFileModel;
@@ -13,27 +15,42 @@ import com.bridgelabz.model.SummaryReportModel;
 import com.csvreader.CsvWriter;
 
 public class SummaryReportCsv {
-
-	int startDate = Integer.parseInt(SecretFileModel.startDate.replace("-", ""));
-	int endDate = Integer.parseInt(SecretFileModel.endDate.replace("-", ""));
-
 	// method for creating the summary report
 	public void createSummaryReport(ArrayList<SummaryReportModel> summaryReportModelList) throws IOException {
+		//initializing the dates
+		String mStartDate = SecretFileModel.getStartDate();
+		String mEndDate = SecretFileModel.getEndDate();
+		
+		//setting the date format
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calender = Calendar.getInstance();
+		
 		System.out.println("Inside initialize report");
 		CsvWriter csvOutput = null;
 		BufferedReader bufferedReader = null;
 		try {
+			Date sDate = dateFormat.parse(mStartDate);
+			Date eDate = dateFormat.parse(mEndDate);
+
+			long dateDifference = eDate.getTime()-sDate.getTime();
+			int days = (int) (dateDifference / (24 * 60 * 60 * 1000));
+			
 			//getting the file from classpath and writing inside the file
 			File file = new File(getClass().getClassLoader().getResource("SummaryReport.csv").getFile());
 			System.out.println("File exists: " + file.exists());
 
-			System.out.println("startDate: "+startDate);
+			System.out.println("startDate: "+mStartDate);
 			// writing into file
 			csvOutput = new CsvWriter(new FileWriter(file), ConstantData.csvDelimiter);
 			csvOutput.write("Task/Date");
-			for (int i = 0; i <= (endDate - startDate); i++) {
-				System.out.println("inside write");
-				csvOutput.write(Integer.toString(startDate + i));
+			for (int i = 0; i <= (days); i++) {
+				
+				//code to increase the date by particular days 
+				calender.setTime(dateFormat.parse(mStartDate));
+				calender.add(Calendar.DATE, i);
+				String date = dateFormat.format(calender.getTime());
+
+				csvOutput.write(date);
 			}
 			csvOutput.endRecord();
 			

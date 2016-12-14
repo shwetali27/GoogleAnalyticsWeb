@@ -24,7 +24,7 @@ public class SummaryDatabaseModel {
 	@Column(name="Discription")
 	private String mGaDiscription;
 	@Column(name="Date")
-	private Integer date;
+	private String date;
 	@Column(name="TotalUsers")
 	private int count;
 	
@@ -36,11 +36,11 @@ public class SummaryDatabaseModel {
 		this.mGaDiscription = mGaDiscription;
 	}
 	
-	public Integer getDate() {
+	public String getDate() {
 		return date;
 	}
 	
-	public void setDate(Integer date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public int getCount() {

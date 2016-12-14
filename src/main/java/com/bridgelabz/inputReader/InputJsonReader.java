@@ -1,6 +1,5 @@
 package com.bridgelabz.inputReader;
 
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -9,6 +8,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import com.bridgelabz.constants.ConstantData;
+import com.bridgelabz.model.DateData;
 import com.bridgelabz.model.GaReportInputModel;
 import com.bridgelabz.model.SecretFileModel;
 
@@ -16,7 +16,7 @@ public class InputJsonReader {
 	
 	ArrayList<GaReportInputModel> GaReportInputModelArrayList = new ArrayList<GaReportInputModel>();
 
-	public ArrayList<GaReportInputModel> readInputJsonFile(InputStreamReader reader){
+	public ArrayList<GaReportInputModel> readInputJsonFile(InputStreamReader reader,DateData dateData){
 		try{
 
 			JSONParser parser = new JSONParser();//json parser is used to read json files
@@ -26,10 +26,12 @@ public class InputJsonReader {
 			JSONObject jsonObject = (JSONObject) obj;//creating json object
 
 			// setting static values in secretFileModelObject
-			SecretFileModel.setStartDate((String) jsonObject.get(ConstantData.startDate));
-
-			SecretFileModel.setEndDate((String) jsonObject.get(ConstantData.endDate));
-
+			/*SecretFileModel.setStartDate((String) jsonObject.get(ConstantData.startDate));*/
+			SecretFileModel.setStartDate(dateData.getStartDate());
+			
+			/*SecretFileModel.setEndDate((String) jsonObject.get(ConstantData.endDate));*/
+			SecretFileModel.setEndDate(dateData.getEndDate());
+			
 			SecretFileModel.setAPPLICATION_NAME((String) jsonObject.get(ConstantData.APPLICATION_NAME));
 
 			SecretFileModel.setKEY_FILE_LOCATION((String) jsonObject.get(ConstantData.KEY_FILE_LOCATION));

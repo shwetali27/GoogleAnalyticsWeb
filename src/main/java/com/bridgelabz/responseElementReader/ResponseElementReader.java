@@ -190,7 +190,7 @@ public class ResponseElementReader {
 					// System.out.println(SecretFileModel.startDate.replace("-",""));
 					// taking the id for first day app open
 					if (appOpenModelArrayListObject.get(i).getmDate()
-							.equals(SecretFileModel.startDate.replace("-", ""))) {
+							.equals(SecretFileModel.getStartDate().replace("-", ""))) {
 						multiMapId.put(appOpenModelArrayListObject.get(i).getmAndroidId(),
 								appOpenModelArrayListObject.get(i).getmDate());
 						multiMapEvent.put(appOpenModelArrayListObject.get(i).getmAndroidId(),
@@ -211,7 +211,7 @@ public class ResponseElementReader {
 						// then only add data
 						if (appOpenModelArrayListObject.get(i).getmAndroidId().equals(key)
 								&& !appOpenModelArrayListObject.get(i).getmDate()
-										.equals(SecretFileModel.startDate.replace("-", ""))) {
+										.equals(SecretFileModel.getStartDate().replace("-", ""))) {
 
 							multiMapId.put(appOpenModelArrayListObject.get(i).getmAndroidId(),
 									appOpenModelArrayListObject.get(i).getmDate());

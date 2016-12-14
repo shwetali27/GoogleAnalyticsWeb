@@ -54,7 +54,7 @@ public class GAreportHandler {
 		APPLICATION_NAME = SecretFileModel.getAPPLICATION_NAME();
 		KEY_FILE_LOCATION = SecretFileModel.getKEY_FILE_LOCATION();
 		SERVICE_ACCOUNT_EMAIL = SecretFileModel.getSERVICE_ACCOUNT_EMAIL();
-		VIEW_ID = SecretFileModel.VIEW_ID;
+		VIEW_ID = SecretFileModel.getVIEW_ID();
 		startDate = SecretFileModel.getStartDate();
 		endDate = SecretFileModel.getEndDate();
 

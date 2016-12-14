@@ -15,14 +15,12 @@
    
     </header><br>
 	<form:form method="post" action="savefile" enctype="multipart/form-data">
+	StartDate:<input type="date" name="startDate"><form:errors path="startDate" cssClass="errors"/>
+	EndDate:<input type="date" name="endDate"><form:errors path="endDate" cssClass="errors"/>
+	<br/><br/>
 		<input name="file" id="fileToUpload" type="file" />
 		
-		<br/>
-	StartDate:<input type="date" name="startDate">
-	<br/>
-	EndDate:<input type="date" name="endDate">
-	<input type="submit" value="Upload">
-		<!-- <input type="submit" value="Upload" style="background-color:#adebad;width: 5em"> -->
+		<input type="submit" value="Upload" style="background-color:#adebad;width: 5em">
 		<br/>
 	</form:form>
 	

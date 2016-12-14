@@ -5,17 +5,17 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SummaryReportModel {
-	private List<Integer> dates = new ArrayList<Integer>();
+	private List<String> dates = new ArrayList<String>();
 	private List<Integer> totalCount = new ArrayList<Integer>();
 	private String mGaDiscription;
 
 	// getters and setters
-	public List<Integer> getDates() {
+	public List<String> getDates() {
 		return dates;
 	}
 
-	public void setDates(List<Integer> dates) {
-		this.dates = dates;
+	public void setDates(List<String> dates2) {
+		this.dates = dates2;
 	}
 
 	public List<Integer> getTotalCount() {

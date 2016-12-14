@@ -1,6 +1,6 @@
 package com.bridgelabz.model;
 
-public class Date {
+public class DateData {
 	private String startDate,endDate;
 
 	public String getStartDate() {
