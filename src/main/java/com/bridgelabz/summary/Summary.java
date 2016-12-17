@@ -92,8 +92,8 @@ public class Summary {
 	}
 
 	// method for creating summary report for all task for first day users
-	public SummaryReportModel createSummary(String task, Multimap<String, String> multiMapId,
-			ArrayList<AllElementModels> allElementModelArrayListObject) throws IOException {
+	public SummaryReportModel createSummary(String task, Multimap<String, String> pMultiMapId,
+			ArrayList<AllElementModels> pAllElementModelArrayListObject) throws IOException {
 		//creating object of class
 		SummaryReportModel mSummaryReportModelObject = new SummaryReportModel();
 
@@ -112,18 +112,18 @@ public class Summary {
 			long mDateDifference = mEndDate.getTime()-mStartDate.getTime();
 			int days = (int) (mDateDifference / (24 * 60 * 60 * 1000));
 
-			Set<String> keys = multiMapId.keySet();
+			Set<String> keys = pMultiMapId.keySet();
 			for (String key : keys) {
-				for (int j = 0; j < allElementModelArrayListObject.size(); j++) {
+				for (int j = 0; j < pAllElementModelArrayListObject.size(); j++) {
 					// System.out.println(task.get(i));
 					// if particular task and key matches the condition then
 					// only
 					// put the value inside hash map
-					if (allElementModelArrayListObject.get(j).getmGadiscription().equals(task)) {
-						if (allElementModelArrayListObject.get(j).getmAndroidId().equals(key)) {
+					if (pAllElementModelArrayListObject.get(j).getmGadiscription().equals(task)) {
+						if (pAllElementModelArrayListObject.get(j).getmAndroidId().equals(key)) {
 							// System.out.println(key);
-							mReportCount.put(allElementModelArrayListObject.get(j).getmDate(),
-									allElementModelArrayListObject.get(j).getmAndroidId());
+							mReportCount.put(pAllElementModelArrayListObject.get(j).getmDate(),
+									pAllElementModelArrayListObject.get(j).getmAndroidId());
 						}
 					}
 

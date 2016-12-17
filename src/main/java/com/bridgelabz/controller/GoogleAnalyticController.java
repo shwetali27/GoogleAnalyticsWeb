@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -40,7 +41,6 @@ import com.bridgelabz.responseFetcher.GaReportResponseFetcher;
 import com.bridgelabz.validation.Validator;
 
 @Controller
-
 public class GoogleAnalyticController {
 	@Autowired(required = true)
 	HibernateDaoImpl hibernateDaoImpl;
@@ -63,11 +63,12 @@ public class GoogleAnalyticController {
 	}
 
 	@RequestMapping(value = "savefile", method = RequestMethod.POST)
-	public ModelAndView uploadForm(@ModelAttribute DateData dateData, BindingResult result,
+	public ModelAndView uploadForm(DateData dateData, BindingResult result,
 			@RequestParam MultipartFile file) throws FileNotFoundException, IOException, GeneralSecurityException {
 
 		System.out.println(dateData.getStartDate() + "," + dateData.getEndDate());
-
+		System.out.println("file info"+file.getContentType());
+		
 		//validating the data
 		Validator.validate(dateData, result);
 		if (result.hasErrors()) {
