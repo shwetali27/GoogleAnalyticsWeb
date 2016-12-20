@@ -6,6 +6,7 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 
 import com.bridgelabz.model.DateData;
 
@@ -19,13 +20,15 @@ public class Validator {
 			// validation for start date
 			if (dateData.getStartDate() == null) {
 				System.out.println("inside start date validator");
-				errors.rejectValue("startDate", "Is Required");
+				//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "startDate",
+						//"required.startDate", "Start date is required.");
+				errors.rejectValue("startDate", "validation.required","");
 			}
 
 			// validation for end date
 			if (dateData.getEndDate() == null) {
 				System.out.println("Inside end date validator");
-				errors.rejectValue("endDate", "Is Required");
+				errors.rejectValue("endDate","validation.required", "");
 			}
 
 			if (dateData.getStartDate() != null && dateData.getEndDate() != null) {
@@ -36,7 +39,7 @@ public class Validator {
 			}
 			if (mDateDifference < 0) {
 				System.out.println("-----");
-				errors.rejectValue("endDate", "select properly");
+				errors.rejectValue("endDate","validation.wrongChoice", "select properly");
 			}
 		} catch (ParseException e) {
 			System.out.println(e);

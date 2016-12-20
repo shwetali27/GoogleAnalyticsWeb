@@ -12,6 +12,7 @@ import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -20,8 +21,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,8 +49,9 @@ public class GoogleAnalyticController {
 	HibernateDaoImpl hibernateDaoImpl;
 
 	@RequestMapping("/uploadform")
-	public ModelAndView uploadForm() {
+	public ModelAndView uploadForm(Model model) {
 		System.out.println("File upload get method");
+		model.addAttribute("dateData", new DateData());
 		return new ModelAndView("uploadform");
 	}
 
@@ -72,8 +76,13 @@ public class GoogleAnalyticController {
 		//validating the data
 		Validator.validate(dateData, result);
 		if (result.hasErrors()) {
+			List<ObjectError> errors = result.getAllErrors();
+			System.out.println(errors.get(0));
+			System.out.println(result.getFieldError().getDefaultMessage());
 			System.out.println(result.getErrorCount());
-			return new ModelAndView("uploadform");
+			ModelAndView mvc = new ModelAndView("uploadform");
+			mvc.addObject("errors", errors);
+			return mvc;
 		}
 		
 		//if data is valid then  

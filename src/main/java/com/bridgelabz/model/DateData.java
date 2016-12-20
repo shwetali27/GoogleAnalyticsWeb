@@ -1,8 +1,14 @@
 package com.bridgelabz.model;
 
-public class DateData {
-	private String startDate,endDate;
+import org.hibernate.validator.constraints.NotEmpty;
 
+public class DateData {
+	@NotEmpty(message = "Please enter start date.")
+	private String startDate;
+	
+	@NotEmpty(message = "Please enter end date.")
+	private String endDate;
+	
 	public String getStartDate() {
 		return startDate;
 	}

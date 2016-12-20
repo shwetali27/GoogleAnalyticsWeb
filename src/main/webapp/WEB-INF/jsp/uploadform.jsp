@@ -14,14 +14,17 @@
    <h1>Upload Json file here</h1>
    
     </header><br>
-	<form:form method="post" action="savefile" enctype="multipart/form-data">
-	StartDate:<input type="date" name="startDate"><form:errors path="startDate" cssClass="errors"/>
-	EndDate:<input type="date" name="endDate"><form:errors path="endDate" cssClass="errors"/>
+	<form:form method="post" action="savefile" enctype="multipart/form-data" modelAttribute="dateData">
+	<table border="0" width="90%">
+	
+	StartDate:<form:input type="date" path="startDate"/><form:errors path="startDate" cssClass="errors"/></br>
+	EndDate:<form:input type="date" path="endDate"/><form:errors path="endDate" cssClass="errors"/>
 	<br/><br/>
 		<input name="file" id="fileToUpload" type="file" />
 		
 		<input type="submit" value="Upload" style="background-color:#adebad;width: 5em">
 		<br/>
+	</table>
 	</form:form>
 	
 			
